@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="161" height="84" viewBox="0 0 161 84">
+  <defs>
+    <filter id="copro" x="0" y="0" width="161" height="84" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Line_3" x="120" y="61.5" width="36" height="20" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="LOGO_2" data-name="LOGO 2" transform="translate(-1252 -3380.5)">
+    <g transform="matrix(1, 0, 0, 1, 1252, 3380.5)" filter="url(#copro)">
+      <text id="copro-2" data-name="copro" transform="translate(4.5 64.5)" fill="#5e6cec" font-size="60" font-family="Quicksand-Bold, Quicksand" font-weight="700" letter-spacing="-0.065em"><tspan x="0" y="0">co</tspan><tspan y="0" fill="#5d5d5d">pro</tspan></text>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1252, 3380.5)" filter="url(#Line_3)">
+      <line id="Line_3-2" data-name="Line 3" x2="18" transform="translate(129 68.5)" fill="none" stroke="#707070" stroke-width="2" opacity="0.476"/>
+    </g>
+  </g>
+</svg>
