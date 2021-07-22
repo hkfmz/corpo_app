@@ -31,6 +31,9 @@ dependencies:
   custom_radio_grouped_button: ^1.0.6+1
   shared_preferences: ^2.0.5
   flutter_timetable_view: ^0.2.0
+  logger: ^0.9.4
+  http: ^0.12.2
+  dio: 3.0.10
   flutter:
     sdk: flutter
 

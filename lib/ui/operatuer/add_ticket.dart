@@ -1,21 +1,28 @@
+import 'package:corpo_app/ui/resident/add_ticket.dart';
 import 'package:corpo_app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 // ignore: unused_import
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
-class AddTicket extends StatefulWidget {
+class AddTicket extends StatefulWidget
+{
   @override
   _AddTicketState createState() => _AddTicketState();
+  
 }
 
 class _AddTicketState extends State<AddTicket> {
 
+  final addTicketCtrl = Get.put<AddTicketCtrl>(AddTicketCtrl());
+
   List<Asset>  images = <Asset>[];
+  double _width;
 
   List<Asset> resultList = <Asset>[];
 
@@ -23,8 +30,10 @@ class _AddTicketState extends State<AddTicket> {
 
   String _error = 'No Error Dectected';
 
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descController = TextEditingController();
+  TextEditingController ticketTitreCtrl = TextEditingController();
+  TextEditingController ticketCategorieCtrl = TextEditingController();
+  TextEditingController ticketDescriptionCtrl = TextEditingController();
+  TextEditingController ticketImageCtrl = TextEditingController();
 
   @override
   void initState() {
@@ -78,6 +87,7 @@ class _AddTicketState extends State<AddTicket> {
   Widget build(BuildContext context) {
 
     _height = MediaQuery.of(context).size.height;
+    _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -90,12 +100,13 @@ class _AddTicketState extends State<AddTicket> {
         ),
       body: Column(
         children: <Widget>[
-          _titleTextField(),             // Title Text Field Widget
+          _titleTextField(),         // Title Text Field Widget
           _horizontalListBtns(),    // horizontal listView Widget
           _descTextField(),        // Desc Text Field Widget
           Expanded(
             child: buildGridView(),       // gridView images Widget
-          )
+          ),
+          envoyerButton(),
         ],
       ),
     );
@@ -118,10 +129,13 @@ class _AddTicketState extends State<AddTicket> {
   }
 
   Widget _titleTextField(){
+    final addTicketCtrl = Get.find<AddTicketCtrl>();
+
     return Container(
-      // color: Colors.blue,
+
       child: TextField(
-        controller: titleController,
+        controller: addTicketCtrl.ticketTitreCtrl,
+
         textCapitalization: TextCapitalization.sentences,
         style: TextStyle(fontSize: 14.sp, color: AppColor.lightBlackColor, fontWeight: FontWeight.w500),
         maxLines: 1,
@@ -139,6 +153,7 @@ class _AddTicketState extends State<AddTicket> {
   }
 
   Widget _horizontalListBtns(){
+    // final addTicketCtrl = Get.find<AddTicketCtrl>();
     return Container(
       height: _height * 0.1,
       // color: Colors.green,
@@ -242,11 +257,13 @@ class _AddTicketState extends State<AddTicket> {
   }
 
   Widget _descTextField(){
+    final addTicketCtrl = Get.find<AddTicketCtrl>();
+
     return Container(
       //  height: _height * 0.16,
       // color: Colors.blue,
       child: TextField(
-        controller: descController,
+        controller: addTicketCtrl.ticketDescriptionCtrl,
         textCapitalization: TextCapitalization.sentences,
         style: TextStyle(fontSize: 11.sp, color: AppColor.lightBlackColor),
         maxLines: 5,
@@ -283,4 +300,30 @@ class _AddTicketState extends State<AddTicket> {
       }),
     );
   }
+
+    Widget envoyerButton() {
+    return Container(
+      width: _width * 0.40,
+      child: ElevatedButton(
+        child: Text(
+          "Envoyer",
+          style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
+        ),
+        onPressed: ()
+        {
+          addTicketCtrl.postTicketToMongoDB();
+        },
+        style: ElevatedButton.styleFrom(
+          elevation: 6,
+          padding: EdgeInsets.all(18),
+          primary: AppColor.pinkColor,
+          onPrimary: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(32.0),
+          ),
+        ),
+      ),
+    );
+  }
+
 }
